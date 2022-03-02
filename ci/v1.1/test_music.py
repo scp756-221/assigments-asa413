@@ -27,10 +27,13 @@ def song(request):
 
 
 def test_simple_run(mserv, song):
-    trc, m_id = mserv.create(song[0], song[1])
+    # Original recording, 1952
+    orig_artist = 'Big Mama Thornton'
+    trc, m_id = mserv.create(song[0], song[1], orig_artist)
     assert trc == 200
-    trc, artist, title = mserv.read(m_id)
-    assert trc == 200 and artist == song[0] and title == song[1]
+    trc, artist, title, oa = mserv.read(m_id)
+    assert (trc == 200 and artist == song[0] and title == song[1]
+            and oa == orig_artist)
     mserv.delete(m_id)
     # No status to check
 

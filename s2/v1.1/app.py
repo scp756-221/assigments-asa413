@@ -93,12 +93,16 @@ def create_song():
         content = request.get_json()
         Artist = content['Artist']
         SongTitle = content['SongTitle']
+        OrigArtist = content['OrigArtist'] if 'OrigArtist' in content else None
     except Exception:
         return json.dumps({"message": "error reading arguments"})
     url = db['name'] + '/' + db['endpoint'][1]
+    payload = {"objtype": "music", "Artist": Artist, "SongTitle": SongTitle}
+    if OrigArtist is not None:
+        payload["OrigArtist"] = OrigArtist
     response = requests.post(
         url,
-        json={"objtype": "music", "Artist": Artist, "SongTitle": SongTitle},
+        json=payload,
         headers={'Authorization': headers['Authorization']})
     return (response.json())
 
