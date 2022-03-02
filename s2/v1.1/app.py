@@ -123,8 +123,8 @@ def delete_song(music_id):
     return (response.json())
 
 
-@bp.route('/read_OrigArtist/<music_id>', methods=['GET'])
-def read_OrigArtist(music_id):
+@bp.route('/read_orig_artist/<music_id>', methods=['GET'])
+def read_orig_artist(music_id):
     headers = request.headers
     # check header here
     if 'Authorization' not in headers:
@@ -149,8 +149,8 @@ def read_OrigArtist(music_id):
     return {'OrigArtist': oa}
 
 
-@bp.route('/write_OrigArtist/<music_id>', methods=['PUT'])
-def write_OrigArtist(music_id):
+@bp.route('/write_orig_artist/<music_id>', methods=['PUT'])
+def write_orig_artist(music_id):
     headers = request.headers
     # check header here
     if 'Authorization' not in headers:
@@ -159,7 +159,7 @@ def write_OrigArtist(music_id):
                         mimetype='application/json')
     try:
         content = request.get_json()
-        OrigArtist = content['OrigArtist']
+        orig_artist = content['OrigArtist']
     except Exception:
         return json.dumps({"message": "error reading arguments"})
     payload = {"objtype": "music", "objkey": music_id}
@@ -167,7 +167,7 @@ def write_OrigArtist(music_id):
     response = requests.put(
         url,
         params=payload,
-        json={"OrigArtist": OrigArtist},
+        json={'OrigArtist': orig_artist},
         headers={'Authorization': headers['Authorization']})
     return (response.json())
 

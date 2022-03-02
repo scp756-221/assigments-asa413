@@ -65,7 +65,7 @@ def test_orig_artist_oa(mserv, m_id_oa):
 def test_full_cycle(mserv):
 
     # `mserv` is an instance of the `Music` class
-
+    
     # Performance at 2010 Vancouver Winter Olympics
     song = ('k. d. lang', 'Hallelujah')
     # Soundtrack of first Shrek film (2001)
@@ -80,7 +80,7 @@ def test_full_cycle(mserv):
     assert (trc == 200 and artist == song[0] and title == song[1]
             and oa == orig_artist)
     orig_artist = 'Big Mama Thornton'
-    trc, m_id = mserv.create(song[0], song[1], orig_artist)
+    trc, m_id = mserv.create(song[0], song[1], orig_orig_artist)
     assert trc == 200
 
     trc, oa = mserv.read_orig_artist(m_id)
