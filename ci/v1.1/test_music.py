@@ -33,3 +33,27 @@ def test_simple_run(mserv, song):
     assert trc == 200 and artist == song[0] and title == song[1]
     mserv.delete(m_id)
     # No status to check
+
+
+@pytest.fixture
+def song_oa(request):
+    # Recorded 1967
+    return ('Aretha Franklin', 'Respect')
+
+
+@pytest.fixture
+def m_id_oa(request, mserv, song_oa):
+    trc, m_id = mserv.create(song_oa[0], song_oa[1])
+    assert trc == 200
+    yield m_id
+    # Cleanup called after the test completes
+    mserv.delete(m_id)
+
+
+def test_orig_artist_oa(mserv, m_id_oa):
+    # Original recording, 1965
+    orig_artist = 'Otis Redding'
+    trc = mserv.write_orig_artist(m_id_oa, orig_artist)
+    assert trc == 200
+    trc, oa = mserv.read_orig_artist(m_id_oa)
+    assert trc == 200 and oa == orig_artist
