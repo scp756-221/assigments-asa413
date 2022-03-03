@@ -65,7 +65,7 @@ def test_orig_artist_oa(mserv, m_id_oa):
 def test_full_cycle(mserv):
 
     # `mserv` is an instance of the `Music` class
-    
+
     # Performance at 2010 Vancouver Winter Olympics
     song = ('k. d. lang', 'Hallelujah')
     # Soundtrack of first Shrek film (2001)
